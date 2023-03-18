@@ -1,4 +1,4 @@
-""" This file converts sentences mood into a RBG colour
+""" This file converts a sentence's mood into a RBG colour.
 """
 
 import text2emotion
@@ -30,12 +30,3 @@ def give_sadness(text: str) -> int:
     sad = sad * 255
     sad = round(sad)
     return sad
-
-
-def emotions_to_colour(emotions: dict) -> tuple:
-    """
-    Convert the emotions in emotions into a tuple of an RGB colour,
-    according to the following scales:
-
-
-    """
