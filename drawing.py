@@ -1,72 +1,75 @@
-""" this file draws the thingy 
-"""
-
-
+""" This file contains the code to convert the input text into a mood ring
+Convert the sentiment of the text into a tuple of an RGB colour,
+    according to the following scales:
+    - Red scale measures how passionate the text is;
+        light red is less passionate and dark red is more passionate
+    - Green scale measures how rude the text is;
+        light green is less rude and dark green is more rude
+    - Blue scale measures how sad the text is;
+        light blue is less sad and dark red is more sad."""
 
 import pygame
-#import pygame.gfxdraw
+import pygame.gfxdraw
 from PIL import Image, ImageDraw
 
 # --- constants ---
-#do we need this?
-BLACK = (  0,   0,   0)
+BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-BLUE  = (  0,   0, 255)
-GREEN = (  0, 255,   0)
-RED   = (255,   0,   0)
-GREY  = (128, 128, 128)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+GREY = (128, 128, 128)
 
 PI = 3.1415
 
-# --- main ----
 
-pygame.init()
-screen = pygame.display.set_mode((800,600))
+def draw_mood_ring() -> None:
+    """
+    Convert the input text into a mood ring with the colours described above.
+    """
+    pygame.init()
+    screen = pygame.display.set_mode((800, 600))
 
-# - generate PIL image with transparent background -
+    # - generate PIL image with transparent background -
 
-pil_size = 300
+    pil_size = 300
 
-pil_image = Image.new("RGBA", (pil_size, pil_size))
-pil_draw = ImageDraw.Draw(pil_image)
-pil_draw.arc((0, 0, pil_size-1, pil_size-1), 0, 270, fill=RED)
-pil_draw.pieslice((0, 0, pil_size-1, pil_size-1), 330, 0, fill=GREY)
+    pil_image = Image.new("RGBA", (pil_size, pil_size))
+    pil_draw = ImageDraw.Draw(pil_image)
+    pil_draw.pieslice((0, 0, pil_size - 1, pil_size - 1), 330, 0, fill=GREY)  # red pie slice
 
-# - convert into PyGame image -
+    # - convert into PyGame image -
 
-mode = pil_image.mode
-size = pil_image.size
-data = pil_image.tobytes()
+    mode = pil_image.mode
+    size = pil_image.size
+    data = pil_image.tobytes()
 
-image = pygame.image.fromstring(data, size, mode)
+    image = pygame.image.fromstring(data, size, mode)
 
-image_rect = image.get_rect(center=screen.get_rect().center)
+    image_rect = image.get_rect(center=screen.get_rect().center)
 
-# - mainloop -
+    # - mainloop -
 
-clock = pygame.time.Clock()
-running = True
+    clock = pygame.time.Clock()
+    running = True
 
-while running:
+    while running:
 
-    clock.tick(10)
+        clock.tick(10)
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_ESCAPE:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = False
 
-    screen.fill(WHITE)
-    #pygame.draw.arc(screen, BLACK, (300, 200, 200, 200), 0, PI/2, 1)
-    #pygame.gfxdraw.pie(screen, 400, 300, 100, 0, 90, RED)
-    #pygame.gfxdraw.arc(screen, 400, 300, 100, 90, 180, GREEN)
+        screen.fill(WHITE)
 
-    screen.blit(image, image_rect) # <- display image
+        screen.blit(image, image_rect)  # <- display image
 
-    pygame.display.flip()
+        pygame.display.flip()
 
-# - end -
+    # - end -
 
-pygame.quit()
+    pygame.quit()
