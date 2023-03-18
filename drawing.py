@@ -59,9 +59,9 @@ while running:
                 running = False
 
     screen.fill(WHITE)
-    pygame.draw.arc(screen, BLACK, (300, 200, 200, 200), 0, PI/2, 1)
-    pygame.gfxdraw.pie(screen, 400, 300, 100, 0, 90, RED)
-    pygame.gfxdraw.arc(screen, 400, 300, 100, 90, 180, GREEN)
+    #pygame.draw.arc(screen, BLACK, (300, 200, 200, 200), 0, PI/2, 1)
+    #pygame.gfxdraw.pie(screen, 400, 300, 100, 0, 90, RED)
+    #pygame.gfxdraw.arc(screen, 400, 300, 100, 90, 180, GREEN)
 
     screen.blit(image, image_rect) # <- display image
 
