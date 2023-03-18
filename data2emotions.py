@@ -46,7 +46,10 @@ def give_passion(text: str) -> int:
         for i in range(0, len(token)):
             if token[i].isupper() or token[i] == '!':
                 passion_chars += 1
-            elif
+            elif i < len(token) - 1 and token[i] == '?' and token[i + 1] in {'?', '!'}:
+                passion_chars += 1
+            elif i > 0 and token[i] == '?' and token[i - 1] in {'?', '!'}:
+                passion_chars += 1
 
     num_chars = sum([len(token) for token in tokens])
     passion = passion_chars / num_chars
