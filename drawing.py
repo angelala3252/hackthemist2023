@@ -20,7 +20,8 @@ PI = 3.1415
 
 # place holder text
 
-text = ''
+text = 'Introducing PCO X Volume II! The 10th edition of the PK x PTW mixed versus event, ' \
+       'for Puyo Puyo Tetris 2 on the Nintendo Switch. Come support some amazing PPT2 competition! '
 
 # pull RGB vals from data2emotions.py
 red = emotions.give_passion(text)
