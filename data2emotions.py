@@ -1,4 +1,4 @@
-""" This file converts a sentences mood into a RBG colour and displays it as a mood ring
+""" This file converts sentences mood into a RBG colour
 """
 
 import text2emotion
