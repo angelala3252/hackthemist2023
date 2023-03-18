@@ -1,27 +1,34 @@
-""" this file draws the thingy 
+""" this file draws the thingy
 """
 
-
-
 import pygame
-#import pygame.gfxdraw
+import pygame.gfxdraw
 from PIL import Image, ImageDraw
+import data2emotions as emotions
 
 # --- constants ---
-#do we need this?
-BLACK = (  0,   0,   0)
+BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-BLUE  = (  0,   0, 255)
-GREEN = (  0, 255,   0)
-RED   = (255,   0,   0)
-GREY  = (128, 128, 128)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+GREY = (128, 128, 128)
 
 PI = 3.1415
 
 # --- main ----
 
+# place holder text
+
+text = ''
+
+# pull RGB vals from data2emotions.py
+red = emotions.give_passion(text)
+green = emotions.give_sentiment(text)
+blue = emotions.give_sadness(text)
+
 pygame.init()
-screen = pygame.display.set_mode((800,600))
+screen = pygame.display.set_mode((800, 600))
 
 # - generate PIL image with transparent background -
 
@@ -29,8 +36,10 @@ pil_size = 300
 
 pil_image = Image.new("RGBA", (pil_size, pil_size))
 pil_draw = ImageDraw.Draw(pil_image)
-pil_draw.arc((0, 0, pil_size-1, pil_size-1), 0, 270, fill=RED)
-pil_draw.pieslice((0, 0, pil_size-1, pil_size-1), 330, 0, fill=GREY)
+pil_draw.arc([0, 0, pil_size - 1, pil_size - 1], 0, 270, fill=RED)
+pil_draw.pieslice([0, 0, pil_size - 1, pil_size - 1], 0, 240, fill=(red, 0, 0))
+pil_draw.pieslice([0, 0, pil_size - 1, pil_size - 1], 240, 120, fill=(0, blue, 0))
+pil_draw.pieslice([0, 0, pil_size - 1, pil_size - 1], 120, 0, fill=(0, 0, blue))
 
 # - convert into PyGame image -
 
@@ -59,11 +68,11 @@ while running:
                 running = False
 
     screen.fill(WHITE)
-    #pygame.draw.arc(screen, BLACK, (300, 200, 200, 200), 0, PI/2, 1)
-    #pygame.gfxdraw.pie(screen, 400, 300, 100, 0, 90, RED)
-    #pygame.gfxdraw.arc(screen, 400, 300, 100, 90, 180, GREEN)
+    # pygame.draw.arc(screen, BLACK, (300, 200, 200, 200), 0, PI/2, 1)
+    # pygame.gfxdraw.pie(screen, 400, 300, 100, 0, 90, RED)
+    # pygame.gfxdraw.arc(screen, 400, 300, 100, 90, 180, GREEN)
 
-    screen.blit(image, image_rect) # <- display image
+    screen.blit(image, image_rect)  # <- display image
 
     pygame.display.flip()
 
