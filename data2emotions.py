@@ -1,4 +1,5 @@
-""" This file converts a sentence's mood into a RBG colour.
+""" This file converts a sentence's mood into a RBG colour, where R measures passion. G measures
+negative sentiment, and B measures sadness.
 """
 
 import text2emotion
