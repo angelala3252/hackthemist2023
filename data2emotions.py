@@ -1,13 +1,27 @@
-""" This file converts sentences mood into a RBG colour
+""" This file converts a sentence's mood into a RBG colour.
 """
 
 import text2emotion
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 
-def sadness(text: str) -> int:
+def give_sentiment(text: str) -> int:
     """
-    take the Sad decmal associated with the text
-    multiply it by 255
+    Return a float that represents the sentiment of the given text.
+    """
+    sia = SentimentIntensityAnalyzer()
+    sentiment = sia.polarity_scores(text)
+    result = sentiment['neg']
+
+    # convert for hex
+    result = result * 255
+    return round(result)
+
+
+def give_sadness(text: str) -> int:
+    """
+    Take the Sad decimal associated with the text and
+    multiply it by 255.
 
     """
     result = text2emotion.get_emotion(text)
