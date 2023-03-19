@@ -8,8 +8,7 @@ Convert the sentiment of the text into a tuple of an RGB colour,
     - Blue scale measures how sad the text is;
         light blue is less sad and dark red is more sad."""
 
-import pygame
-#import pygame.gfxdraw
+import pygame.gfxdraw
 from PIL import Image, ImageDraw
 import data2emotions as emotions
 
@@ -34,7 +33,7 @@ def draw_mood_ring(text: str) -> None:
     blue = emotions.give_sadness(text)
 
     pygame.init()
-    screen = pygame.display.set_mode((800,600))
+    screen = pygame.display.set_mode((800, 600))
 
     # - generate PIL image with transparent background -
 
@@ -42,10 +41,12 @@ def draw_mood_ring(text: str) -> None:
 
     pil_image = Image.new("RGBA", (pil_size, pil_size))
     pil_draw = ImageDraw.Draw(pil_image)
-    pil_draw.arc([0, 0, pil_size - 1, pil_size - 1], 0, 270, fill=RED)
-    pil_draw.pieslice([0, 0, pil_size - 1, pil_size - 1], 0, 240, fill=(red, 0, 0))
-    pil_draw.pieslice([0, 0, pil_size - 1, pil_size - 1], 240, 120, fill=(0, blue, 0))
-    pil_draw.pieslice([0, 0, pil_size - 1, pil_size - 1], 120, 0, fill=(0, 0, blue))
+    # pil_draw.arc([0, 0, pil_size - 1, pil_size - 1], 0, 0, fill=BLACK)
+    pil_draw.pieslice((0, 0, pil_size - 1, pil_size - 1), 210, 330, fill=(red, 0, 0))
+    pil_draw.pieslice((0, 0, pil_size - 1, pil_size - 1), 90, 210, fill=(0, green, 0))
+    pil_draw.pieslice((0, 0, pil_size - 1, pil_size - 1), 330, 90, fill=(0, 0, blue))
+    pil_draw.ellipse([(75, 75), (pil_size - 75, pil_size - 75)], fill=(red, green, blue), \
+                     outline=(red, green, blue))
 
     # - convert into PyGame image -
 
